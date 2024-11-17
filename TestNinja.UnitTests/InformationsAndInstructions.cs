@@ -67,5 +67,23 @@ namespace TestNinja.UnitTests
         #endregion
 
         #endregion
+
+        // <---- Naming and Organising Tests --->
+        #region
+        // For each project in our solution, WE SHOULD HAVE A UNIT TESTING PROJECT. So if you have a project called
+        //TestNinja, WE SHOULD HAVE A SEPARATE PROJECT called TestNinja.UnitTests. As a Rule of Thumb we SHOULD 
+        //SEPARATE UNIT AND INTEGRATION TESTS, because Unit Tests execute fast and Integration Tests takes longer so
+        //we want to RUN UNIT TEST FREQUENTLY as we're writing code and Integration Test just BEFORE COMMITTING OUR 
+        //CODE TO THE REPOSITORY to make sure everything works.
+
+        //In the Project, we often have Test Class FOR EACH CLASS IN OUR PRODUCTION CODE. So if we have a class called
+        //Reservation we should have a class called ReservationTests. FOR EACH METHOD IN RESERVATION CLASS, WE SHOULD HAVE 
+        //ONE OR MORE TEST METHODS. The number of tests we need DEPENDS ON WHAT WE'RE TESTING often the NUMBER OF TESTS IS
+        //GREATER OR EQUAL TO THE NUMBER OF EXECUTION PATHS.
+
+        //The name of our tests SHOULD CLEARLY SPECIFY THE BUSINESS RULE WE'RE TESTING. The naming convention of naming our
+        //tests. 
+        //[MethodName]_[Scenario we're Testing]_[Expected Behavior].
+        #endregion
     }
 }
