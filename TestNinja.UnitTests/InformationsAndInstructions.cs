@@ -67,5 +67,25 @@ namespace TestNinja.UnitTests
         #endregion
 
         #endregion
+
+        // <---- Writing Trustworthy Test --->
+        #region
+        //A trustworthy test is the kind of test we can rely upon. So if the test passes, you know that your code is working and if it fails
+        //you know that there is something wrong with your code.
+
+        //How can we write trustworthy tests?
+        //1. Using the Test Driven Development (TDD) with TDD we start by writing a failing test and then we write production code to make that test pass.
+        //   So if the test passes that means we have written the right productiojn code to make that test pass. And if the test fails that means something
+        //   was wrong with the production code.
+        //2. Using Code First Testing (CFT) we start by writing production code and then we write a test to make sure that code works. When writing a test
+        //   after your production code we should go to the line that is suppossed to make that line or test pass and make a small change then run the test
+        //   again. So if you create a bug on the production code and the test is still passing that means the test is not testing the right thing.
+
+        //Key Takeaway: When writing our tests after the Production Code run our test if it passes, then go in the production code and make a small change
+        //in the line that is supposed to make the test pass. Then create a bug, return a different value or maybe comment out that line, if you change the 
+        //line that is supposed to make the test pass then our test still passes. That means that test is not testing the right thing. Because if we modify
+        //that line and create a bug, the test should fail. So let's make sure to right trustworthy tests that will give us value. So when they pass we know 
+        //our code is working and when they fail we know there is something wrong with our code.
+        #endregion
     }
 }
