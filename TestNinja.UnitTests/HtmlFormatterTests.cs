@@ -26,7 +26,7 @@ namespace TestNinja.UnitTests
             //Sample of Too General Assertion
             Assert.That(result, Does.StartWith("<strong>"));
             //We can make more specific by adding this one:
-            Assert.That(result, Does.EndWith("/<strong>"));
+            Assert.That(result, Does.EndWith("</strong>"));
             Assert.That(result, Does.Contain("abc"));
 
             //Key Takeaway: When Testing strings it's better if YOUR ASSERTIONS ARE A LITTLE BIT MORE GENERAL, BECAUSE IF THEY ARE TOO
