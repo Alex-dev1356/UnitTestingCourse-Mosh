@@ -9,6 +9,10 @@ namespace TestNinja.Fundamentals
 
         public event EventHandler<Guid> ErrorLogged; 
         
+        //Here we do have 3 test cases for this method, we have for null, empty string and white space
+        // null
+        // ""
+        // " "
         public void Log(string error)
         {
             if (String.IsNullOrWhiteSpace(error))
