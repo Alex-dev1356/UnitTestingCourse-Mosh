@@ -109,7 +109,7 @@ namespace TestNinja.UnitTests
         // <---- Writing Trustworthy Test --->
         #region
         //When testing methods that return an array or a collection,we need to do our own assessment on how general, or how specific your tests should be.
-        
+
         //Key Takeaway: When Testing methods that return an array or a collection, make sure our test methods are not too general or too specific.     
         #endregion
 
@@ -129,6 +129,11 @@ namespace TestNinja.UnitTests
         //The name of our tests SHOULD CLEARLY SPECIFY THE BUSINESS RULE WE'RE TESTING. The naming convention of naming our
         //tests. 
         //[MethodName]_[Scenario we're Testing]_[Expected Behavior].
+        #endregion
+
+        // <---- Testing Private Methods --->
+        #region
+        //WE SHOULD NOT TEST PRIVATE OR PROTECTED METHODS,  as the implementation of those methods may change or vary and our tests will fail every time we change the implementation.
         #endregion
     }
 }
