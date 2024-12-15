@@ -135,5 +135,9 @@ namespace TestNinja.UnitTests
         #region
         //WE SHOULD NOT TEST PRIVATE OR PROTECTED METHODS,  as the implementation of those methods may change or vary and our tests will fail every time we change the implementation.
         #endregion
+
+        //Note: UNIT TESTS SHOULD NOT TOUCH EXTERNAL RESOURCES. A TEST THAT TOUCHES EXTERNAL RESOURCE
+        //IS CONSIDERED TO BE INTEGRATION TEST.
+
     }
 }
