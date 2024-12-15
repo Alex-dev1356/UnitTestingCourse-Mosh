@@ -139,5 +139,49 @@ namespace TestNinja.UnitTests
         //Note: UNIT TESTS SHOULD NOT TOUCH EXTERNAL RESOURCES. A TEST THAT TOUCHES EXTERNAL RESOURCE
         //IS CONSIDERED TO BE INTEGRATION TEST.
 
+        //Loosely-Coupled and Testable Code
+        #region
+        //Most leagacy applications are built w/o unit testing in mind. So inorder to Unit Test them
+        //we need to REFACTOR them towards a testable and loosely-coupled design. In a loosely-coupled
+        //design we can REPLACE ONE OBJECT W/ ANOTHER at run-time. So when Unit Testing a Class that
+        //uses an object that talks to an EXTERNAL RESOURCE, we can replace that object w/ a fake object
+        //w/c we call TEST DOUBLE. Here are the Three steps that we NEED TO FOLLOW to achieve a Testable
+        //and Loosely-coupled design:
+
+        //1. We need to extract the code that uses an external resource into a separate class. So we put 
+        //the code that talks to an external resource into a separate class and ISOLATE IT FROM THE REST
+        //OF OUR CODE.
+
+        //2. We extract an Interface from that class. We use Interface becuase an Interfasce is like a 
+        //contract, it simply declares a bunch of methods and properties but none of these have an 
+        //implementation, none of these methods have code. An Interface simply tells C# compiler that
+        //somewhere in the code, there are probably one or more classes that implements this contract.
+        //So these classes implement the members declared in the interface. We can have two different 
+        //classes that implement that Interface. One is the real implementation that uses an external
+        //resource, the other IS THE FACE ONE which we call the TEST DOUBLE.
+
+        //3. We modify the class under test. We talk to this interface instead of one of its concrete 
+        //implementations. So instead of being dependent on a specific implementation, it will be dependent
+        //only on the interface or the contract. We can pass any object that implements that interface
+        //and this way the class becomes loosely-coupled and testable.
+
+        //In practical terms, this means we should delete the lines where we create an instance of that
+        //implementation using the new operator (delete this: var reader = new FileReader()). Beacause
+        //when we use the new operator inside a class, we're making that class tightly coupled or tightly
+        //dependent on a given implementation. So we cannot replace that implementation in our test with a
+        //fake object. So instead of newing up a specific implementation, our program gains an interface or
+        //a contract and then pass on the implementation of that interface from the outside. We can pass that
+        //as a parameter to a method (Ex. public void MyMethod(IFileReader reader) {} ), we can also pass a
+        //dependency by a constructor or a property.
+
+        //So when we program against interfaces, we can provide different implementations at different times.
+        //In our production code, we'll provide the real implementation that talks to an external resource and
+        //in our tests we PROVIDE A FAKE IMPLEMENTATION, and this is called DEPENDENCY INJECTION. Instead of
+        //newing up dependencies, we INJECT THEM FROM THE OUTSIDE. 
+
+        //DEPENDENCY INJECTION SIMPLY MEANS WE INJECT OR SUPPLY THE DEPENDENCIES OF A CLASS FROM THE OUTSIDE,
+        //AND THIS MAKES YOUR CLASSES LOOSELY-COUPLED AND TESTABLE.
+
+        #endregion
     }
 }
