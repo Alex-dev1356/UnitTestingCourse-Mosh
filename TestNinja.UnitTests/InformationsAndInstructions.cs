@@ -183,5 +183,24 @@ namespace TestNinja.UnitTests
         //AND THIS MAKES YOUR CLASSES LOOSELY-COUPLED AND TESTABLE.
 
         #endregion
+
+        //Injecting Dependencies via Method Parameters
+        #region
+        //In the ReadVideoTitle Method (Under VideoService Class), instead of working with the concrete
+        //implementation which is the FileReader(), we're going to pass an IFileReader object as a parameter
+        //to the ReadVideoTitle Method (ReadVideoTitle(IFileReader filereader)) and we can get rid of the 
+        //new FileReader() operator, so now we use the fileReader Argument : var str = fileReader.Read("video.txt");
+        //With this simple change, our VideoService Class becomes loosely-coupled and testable. Because in our prod
+        //code we can pass a real file reader object to the project whereas in our test, we can pass a fake fileReader
+        //object.
+
+        //Dependency Injection Framework is responsible to newing up the objects and passing them to our methods.
+        //For demo we're going to create a Program.cs file and there we're gonna call the VideoService() along with its
+        //ReadTitle Method.
+
+        //NOTE: It's a good practice that our Unit Testing Project mimic the SAME STRUCTURE we have on the project on
+        //our test. So we're also going to create a "Mocking" Folder in our Unit Testing Project. And we're going to add
+        //all the Unit Tests for the classes defined in the Mocking Namespace iside the Mocking folder.
+        #endregion
     }
 }
