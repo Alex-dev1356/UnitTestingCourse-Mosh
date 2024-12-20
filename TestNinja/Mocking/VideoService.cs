@@ -9,15 +9,28 @@ namespace TestNinja.Mocking
 {
     public class VideoService
     {
-        public IFileReader FileReader { get; set; }
+        private readonly IFileReader _fileReader;
 
-        public VideoService()
+        //public VideoService()
+        //{
+        //    _fileReader = new FileReader();
+        //}
+
+        //public VideoService(IFileReader fileReader)
+        //{
+        //    _fileReader = fileReader;
+        //}
+
+        //We can refactor our Constructor to combine the two constructors with this technique
+        public VideoService(IFileReader fileReader = null)
         {
-            FileReader = new FileReader();
+            //This code means that IF the fileReader IS NOT NULL, we're going to use that to
+            //set this private field, otherwise we're gonna new up this FileReader Object. 
+            _fileReader = fileReader ?? new FileReader();
         }
         public string ReadVideoTitle()
         {
-            var str = FileReader.Read("video.txt");
+            var str = _fileReader.Read("video.txt");
             var video = JsonConvert.DeserializeObject<Video>(str);
             if (video == null)
                 return "Error parsing the video.";

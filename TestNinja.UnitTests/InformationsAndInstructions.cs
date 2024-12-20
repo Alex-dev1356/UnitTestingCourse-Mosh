@@ -222,5 +222,21 @@ namespace TestNinja.UnitTests
         //we remove the new MockFileReader() parameter on the var result variable. On the VideoServiceTests before acting we should 
         //replace the real FileReader with the fake one (var service = new VideoService(); then below service.FileReader = new MockFileReader();)
         #endregion
+
+        //Injecting Dependencies via Constructor
+        #region
+        //On the constructor, we're gonna add IFileReader fileReader, and we're gonna change the public
+        //property with a private field because we're going to inject a dependency at the time of creating 
+        //a VideoService Object, so we're going to delete the getter and the setter, we repalce it with 
+        //private readonly IFileReader _fileReader; and inside the constructor _fileReader = fileReader;.
+        //On the VideoService Class we're gonna create another constructor that doesn't take any parameters,
+        //so its a default constructor, on this constructor we can set a _fileReader = new FileReader(); object
+        //So in our production code, we gonna use the default constructor , but in our test code we're
+        //going to use the constructor with one parameter so we can pass a fake FileReader.
+
+        //In our production code the Prgram.cs we're creating a new VideoService WITHOUT ANY ARGUMENTS to the constructor.
+        //In this case OUR ARGUMENT IS NULL, so with this implementation we're gonna set _fileReader = new FileReader() Object.
+        //In our UnitTest we're gonna pass a fake fileReader object. On our Unit Test var service = new VideoService(new MockFileReader());
+        #endregion
     }
 }
