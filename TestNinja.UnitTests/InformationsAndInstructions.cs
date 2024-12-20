@@ -202,5 +202,25 @@ namespace TestNinja.UnitTests
         //our test. So we're also going to create a "Mocking" Folder in our Unit Testing Project. And we're going to add
         //all the Unit Tests for the classes defined in the Mocking Namespace iside the Mocking folder.
         #endregion
+
+        //Injecting Dependencies via Properties
+        #region
+        //One issue that we may encounter when Injecting Dependencies via Method Parameter is that, we may be
+        //changing the signature of our Method. Let's imagine we're using the ReadVideoTitle Method in our code
+        //10 different places and all of a sudden we Introduce the "IFileReader fileReader Parameter" then we're
+        //gonna need to modify  those ten places in our code. The other issue we may run into is that some dependency
+        //injection framework cannot inject dependencies via method parameters. There are quite a few dependency injection
+        //frameworks out there, every team locves a different framework.
+
+        //Instead of Injecting Depency using a parameter, we can Inject it using a property. We need to create a property
+        //OF TYPE IFileReader and we need to instanciate the class who implemented that interface inside the constructor of 
+        //our VideoService Class, with this we can now remove the IFileReader fileReader parameter inside the ReadVideoTitle()
+        //method. When Testing the VideoServide Class just BEFORE CALLING THE ReadVideoTitle Method, we can replace the
+        //new FileReader()(the real file reader) into new MockFileReader()(the fake one or Test Double).
+
+        //On the Program Class and remove the new FileReader() parameter on the title variable, similarly on the VideoServiceTests
+        //we remove the new MockFileReader() parameter on the var result variable. On the VideoServiceTests before acting we should 
+        //replace the real FileReader with the fake one (var service = new VideoService(); then below service.FileReader = new MockFileReader();)
+        #endregion
     }
 }

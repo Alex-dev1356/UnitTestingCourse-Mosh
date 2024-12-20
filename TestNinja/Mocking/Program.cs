@@ -11,7 +11,7 @@ namespace TestNinja.Mocking
         public static void Main()
         {
             var service = new VideoService();
-            var result = service.ReadVideoTitle(new FileReader());
+            var result = service.ReadVideoTitle();
         }
     }
 }
