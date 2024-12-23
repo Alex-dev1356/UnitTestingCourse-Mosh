@@ -238,5 +238,17 @@ namespace TestNinja.UnitTests
         //In this case OUR ARGUMENT IS NULL, so with this implementation we're gonna set _fileReader = new FileReader() Object.
         //In our UnitTest we're gonna pass a fake fileReader object. On our Unit Test var service = new VideoService(new MockFileReader());
         #endregion
+
+        //Dependency Injection Framework
+        #region
+        //We have multiple dependency injection framework that we can use like (NInject, StructureMap, Spring.NET,
+        //Autofac, Unity and etc...) almost all these frameworks follows the same principles. In a dependency
+        //injection framework, we have a container and this container is a registry of all our interfaces and their
+        //implementation, when our application starts, our DI Framework will automatically take care of creating object
+        //graph based on the interfaces and types registered in the container.
+
+        //NOTE: The two most popular DI Frameworks are NInject and Autofac. Read the documentation about what we need
+        //to use them in our applications.
+        #endregion
     }
 }
