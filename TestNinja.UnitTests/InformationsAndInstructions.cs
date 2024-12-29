@@ -296,5 +296,23 @@ namespace TestNinja.UnitTests
         //the EXTERNAL BEHAVIOUR and NOT THE IMPLEMENTATION.So PREFER STATE-BASED TESTING OVER INTERACTION TESTING.
         //AND USE INTERACTION TESTING ONLY WHEN DEALING WITH EXTERNAL RESOURCES.
         #endregion
+
+        //Testing the Interaction between Two Objects
+        #region
+        //On the Mocking Folder, Inside the OrderService Class we want to write a test for this method (PlaceOrder(Order order))
+        //and assert that _storage.Store(order) is called with the same object that we passed to the PlaceOrder Method.
+
+        //Let's create a Test inside the Mock Folder on the Unit Test Project. Based on the OrderService Class we are Injecting the
+        //IStorage Object on the constructor. So in our test we need to create a Mock Object for IStorage Interface. So in our 
+        //OrderServiceTest Class we create a Mock Object for IStorage Interface. We create a var storage = new Mock<IStorage>(); then
+        //we create an order service var orderService = new OrderService(storage.Object); then we need to act orderService.PlaceOrder(new Order());
+        //and finally we need to assert that _storage.Store(order) is called with the same object that we passed to the PlaceOrder Method.
+        //We do that by using Verify Method. Verify(storage => storage.Store(order)); through this we can verify if the given method is called with 
+        //the right argument or not. We need to make sure that the right argument is passed to the method so we use the lambda expression and pass
+        // the same object that we passed to the PlaceOrder Method so we add the Order Object.
+
+        //Note: To test the interaction between two objects, we can use the Verify Method of Moq Objects. The Moq SetUp Method we use this to program
+        //a Mock Object.
+        #endregion
     }
 }
