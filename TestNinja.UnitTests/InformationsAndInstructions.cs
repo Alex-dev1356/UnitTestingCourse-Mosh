@@ -314,5 +314,14 @@ namespace TestNinja.UnitTests
         //Note: To test the interaction between two objects, we can use the Verify Method of Moq Objects. The Moq SetUp Method we use this to program
         //a Mock Object.
         #endregion
+
+        //Fake as Little as Possible
+        #region
+        //USER MOCKS AS LITTLE AS POSSIBLE. Reserve them ONLY WHEN DEALING WITH EXTERNAL RESOURCES.
+        //We wuse Mocks to remove the need for external resources from our Unit Tests so they can 
+        //run quickly and reliably.
+
+        //Note: Unit Tests SHOULD BE FAST.
+        #endregion
     }
 }
