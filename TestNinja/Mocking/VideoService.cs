@@ -16,18 +16,18 @@ namespace TestNinja.Mocking
         //    _fileReader = new FileReader();
         //}
 
-        //public VideoService(IFileReader fileReader)
-        //{
-        //    _fileReader = fileReader;
-        //}
+        public VideoService(IFileReader fileReader)
+        {
+            _fileReader = fileReader;
+        }
 
         //We can refactor our Constructor to combine the two constructors with this technique
-        public VideoService(IFileReader fileReader = null)
-        {
-            //This code means that IF the fileReader IS NOT NULL, we're going to use that to
-            //set this private field, otherwise we're gonna new up this FileReader Object. 
-            _fileReader = fileReader ?? new FileReader();
-        }
+        //public VideoService(IFileReader fileReader = null)
+        //{
+        //    //This code means that IF the fileReader IS NOT NULL, we're going to use that to
+        //    //set this private field, otherwise we're gonna new up this FileReader Object. 
+        //    _fileReader = fileReader ?? new FileReader();
+        //}
         public string ReadVideoTitle()
         {
             var str = _fileReader.Read("video.txt");

@@ -250,5 +250,36 @@ namespace TestNinja.UnitTests
         //NOTE: The two most popular DI Frameworks are NInject and Autofac. Read the documentation about what we need
         //to use them in our applications.
         #endregion
+
+        //Creating Mock Objects Using Moq
+        #region
+        //On our Unit Test solution, go to "Manage Nuget Packages" then search for "Moq" then install it.
+
+        //After the installation, we no longer need the MockFileReader Class and we can delete it in our Unit Test
+        //Project. On the VideoServiceTests Class we create var mockFileReader = new Mock<IFileReader>(), here we're telling
+        //the Moq Library we want an object that implements the IFileReader interface. The mockFileReader is NOT THE ACTUAL 
+        //OBJECT its a MOCK OBJECT, because we set this to a new Mock of IFileReader.
+
+        //We need to program this mock because by default, it doesn't have any behavior it's like an object that implements
+        //the IFileReader interface but doesn't do anything, it doesn't have any code now let's go back to our VideoService Class
+        //on the var str = _fileReader.Read("video.txt"); we're calling the Read Method of _fileReader and we're passing it "video.txt"
+        //as an argument. So we need to program our Mock, so when we call the Read Method and give it "video.txt" as a string, its
+        //going to return a string.
+
+        //Back in our VideoServiceTest, the way we do this is via the SETUP METHOD, we call fileReader.Setup(fr => fr.Read("video.txt")).Returns("");
+        //and inside we're gonna pass a lambda expression fr in short for filereader goes to fr.Read and we specify the argument ("video.txt") so with
+        //this we're telling this mock fileReader that when we call the Read Method with this argument (fr.Read("video.txt")) it should return some
+        //string, in our case since the scenario we're testing is for an empty file, we're going to return an empty string ("")
+
+        //Here (.Returns("")) we have an option, we can also throw an exception and specify the type of exception. This fileReader IS NOT that object
+        //that implements IFileReader, it's a Mock Object but here (var service = new VideoService(new MockFileReader()) when initializing this video
+        //service, we need to get that Object, we simply pass (fileReader.Object). So this is the actual object that implements IFileReader.
+
+        //When we use Mocks our test methods get a little bit noisy, that's why we shoul reserve Mocks ONLY FOR DEALING WITH EXTERNAL DEPENDENCIES.
+        //When we use Mocks, it is good to put on the Setup Method or Setup Attribute some of the arrange part, like var service = new VideoService(new MockFileReader())
+        //and var service = new VideoService(fileReader.Object);
+
+        //Note: To know about the list of feature of Moq Framework, read it's documentation here: https://github.com/devlooped/mog/wiki
+        #endregion
     }
 }
