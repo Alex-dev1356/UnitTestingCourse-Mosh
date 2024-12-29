@@ -281,5 +281,20 @@ namespace TestNinja.UnitTests
 
         //Note: To know about the list of feature of Moq Framework, read it's documentation here: https://github.com/devlooped/mog/wiki
         #endregion
+
+        //State-based vs Interaction Testing
+        #region
+        //State-based Testing - we asserted that our methods returned the right value or set the right state.
+        //We test the state changes in our application.
+
+        //However when dealing with the code that touches external resources, we need to verify the class we're
+        //testing interacts with another class properly.
+
+        //Interaction Testing - we test the interaction of one class with another class.
+
+        //Note: USE INTERACTION TESTING ONLY WHEN DEALING WITH EXTERNAL DEPENDENCIES. Our test should only test 
+        //the EXTERNAL BEHAVIOUR and NOT THE IMPLEMENTATION.So PREFER STATE-BASED TESTING OVER INTERACTION TESTING.
+        //AND USE INTERACTION TESTING ONLY WHEN DEALING WITH EXTERNAL RESOURCES.
+        #endregion
     }
 }
