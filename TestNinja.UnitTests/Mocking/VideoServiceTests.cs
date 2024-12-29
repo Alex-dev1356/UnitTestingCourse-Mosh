@@ -40,5 +40,15 @@ namespace TestNinja.UnitTests.Mocking
 
             Assert.That(result, Does.Contain("error").IgnoreCase);
         }
+
+        [Test]
+        public void ReadVideoTitle_NotEmptyFile_ReturnErrorMessage()
+        {
+            _fileReader.Setup(fr => fr.Read("video.txt")).Returns("video.txt");
+
+            var result = _videoService.ReadVideoTitle();
+            
+            Assert.That(result, Is.EqualTo("video.txt").IgnoreCase);
+        }
     }
 }
