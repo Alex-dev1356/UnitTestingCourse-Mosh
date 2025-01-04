@@ -70,6 +70,13 @@ namespace TestNinja.Mocking
         public bool IsProcessed { get; set; }
     }
 
+    public class MockVideo : IVideo
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public bool IsProcessed { get; set; }
+    }
+
     public class VideoContext : DbContext
     {
         public DbSet<Video> Videos { get; set; }

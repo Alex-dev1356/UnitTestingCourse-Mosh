@@ -336,5 +336,12 @@ namespace TestNinja.UnitTests
         //Class would be tightly coupled to the VideoRepository Class. So we need to create an Interface for the VideoRepository Class then we can use any classes
         //that implements the IVideoRepository Interface.
         #endregion
+
+        //Writing Unit Test for GetUnprocessedVideosAsCsv Method
+        #region
+        //On the VideoServiceTest Class we need to create a Mock Object for IVideoRepository Interface, which we already done earlier during the refactoring and now 
+        //on the arrange part we need to program our Mock. we use _videoRepository.Setup(vr => vr.GetUnprocessedVideos()).Returns(new List<Video>()); to return an
+        //empty list. Next we're gonna call _videoService.GetUnprocessedVideosAsCsv() get the result and assert that the result IsEqualTo an empty string.
+        #endregion
     }
 }
