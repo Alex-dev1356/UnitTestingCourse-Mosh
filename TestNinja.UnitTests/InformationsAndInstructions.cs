@@ -323,5 +323,18 @@ namespace TestNinja.UnitTests
 
         //Note: Unit Tests SHOULD BE FAST.
         #endregion
+
+        //Refactoring VideoService Class to test GetUnprocessedVideosAsCsv Method
+        #region
+        //We need to isolate the using (var context = new VideoContext()) part since that is the one that connects to an external dependency,
+        //On the Mocking Folder we create VideoRepository Class and we use IEnumerable<Video> because we simply want to enumerate this list.
+        //We just want to iterate over it, back on the VideoService Class we transfer the var videos = ...... to our VideoRepository Class.
+        //We need to have a reference on the DbContext(context.Videos) so back in our VideoService Class we copy the using(var context = new VideoContext())
+        //to our new class and we simply return videos, on the VideoService Class we no longer need the 'using' block. On the foreach block we need to get 
+        //these videos from our video repository. So the next step of refactoring is these videos, we're gonna new up the VideoRepository Class and call
+        //GetUnprocessedVideos Method and get the result and store it in the videos variable. However when we new up the VideoRepository Class the VideoService
+        //Class would be tightly coupled to the VideoRepository Class. So we need to create an Interface for the VideoRepository Class then we can use any classes
+        //that implements the IVideoRepository Interface.
+        #endregion
     }
 }

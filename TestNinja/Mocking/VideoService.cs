@@ -10,15 +10,19 @@ namespace TestNinja.Mocking
     public class VideoService
     {
         private readonly IFileReader _fileReader;
+        private readonly IVideo _video;
+        private readonly IVideoRepository _videoRepository;
 
         //public VideoService()
         //{
         //    _fileReader = new FileReader();
         //}
 
-        public VideoService(IFileReader fileReader)
+        public VideoService(IFileReader fileReader, IVideo video, IVideoRepository videoRepository)
         {
             _fileReader = fileReader;
+            _video = video;
+            _videoRepository = videoRepository;
         }
 
         //We can refactor our Constructor to combine the two constructors with this technique
@@ -31,9 +35,10 @@ namespace TestNinja.Mocking
         public string ReadVideoTitle()
         {
             var str = _fileReader.Read("video.txt");
-            var video = new Video() {Title = str};
+            //var video = new Video() {Title = str};
             //var video = JsonConvert.DeserializeObject<Video>(str);
-            if (video == null)
+            var video = _video;
+            if (String.IsNullOrEmpty(video.Title))
                 return "Error parsing the video.";
             return video.Title;
         }
@@ -41,23 +46,24 @@ namespace TestNinja.Mocking
         public string GetUnprocessedVideosAsCsv()
         {
             var videoIds = new List<int>();
-            
-            using (var context = new VideoContext())
-            {
-                var videos = 
-                    (from video in context.Videos
-                    where !video.IsProcessed
-                    select video).ToList();
-                
-                foreach (var v in videos)
-                    videoIds.Add(v.Id);
 
-                return String.Join(",", videoIds);
-            }
+            var videos = _videoRepository.GetUnprocessedVideos();
+
+            foreach (var v in videos)
+                videoIds.Add(v.Id);
+
+            return String.Join(",", videoIds);
         }
     }
 
-    public class Video
+    public interface IVideo
+    {
+        int Id { get; set; }
+        bool IsProcessed { get; set; }
+        string Title { get; set; }
+    }
+
+    public class Video : IVideo
     {
         public int Id { get; set; }
         public string Title { get; set; }

@@ -15,6 +15,8 @@ namespace TestNinja.UnitTests.Mocking
     {
         private VideoService _videoService;
         private Mock<IFileReader> _fileReader;
+        private Mock<IVideo> _video;
+        private Mock<IVideoRepository> _videoRepository;
 
         [SetUp]
         public void SetUp()
@@ -22,7 +24,8 @@ namespace TestNinja.UnitTests.Mocking
             //Refactored code, so that we won't be newing up the fileReader and service objects everytime 
             //we create a new test
             _fileReader = new Mock<IFileReader>();
-            _videoService = new VideoService(_fileReader.Object);
+            _video = new Mock<IVideo>();
+            _videoService = new VideoService(_fileReader.Object, _video.Object, _videoRepository.Object);
         }
 
         [Test]
@@ -35,6 +38,7 @@ namespace TestNinja.UnitTests.Mocking
             //We use Moq Library to create a dynamic mock. We Select the Mock from Moq Name Space.
             //var _fileReader = new Mock<IFileReader>();
             _fileReader.Setup(fr => fr.Read("video.txt")).Returns("");
+            _video.Setup(v => v.Title).Returns("");
 
             var result = _videoService.ReadVideoTitle();
 
@@ -45,6 +49,7 @@ namespace TestNinja.UnitTests.Mocking
         public void ReadVideoTitle_NotEmptyFile_ReturnErrorMessage()
         {
             _fileReader.Setup(fr => fr.Read("video.txt")).Returns("video.txt");
+            _video.Setup(v => v.Title).Returns("video.txt");
 
             var result = _videoService.ReadVideoTitle();
             
