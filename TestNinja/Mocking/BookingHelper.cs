@@ -6,25 +6,21 @@ namespace TestNinja.Mocking
 {
     public static class BookingHelper
     {
-        public static string OverlappingBookingsExist(Booking booking)
+        public static string OverlappingBookingsExist(Booking booking, IBookingHelperRepository repository )
         {
             if (booking.Status == "Cancelled")
                 return string.Empty;
 
-            var unitOfWork = new UnitOfWork();
-            var bookings =
-                unitOfWork.Query<Booking>()
-                    .Where(
-                        b => b.Id != booking.Id && b.Status != "Cancelled");
+            var bookings = repository.GetActiveBookings(booking.Id);
 
+            //There is a Bug in this logic of code, navigate to: https://stackoverflow.com/questions/13513932/algorithm-to-detect-overlapping-periods
+            //bool overlap = tStartA < tEndB && tStartB < tEndA;
             var overlappingBooking =
                 bookings.FirstOrDefault(
                     b =>
-                        booking.ArrivalDate >= b.ArrivalDate
-                        && booking.ArrivalDate < b.DepartureDate
-                        || booking.DepartureDate > b.ArrivalDate
-                        && booking.DepartureDate <= b.DepartureDate);
-
+                        booking.ArrivalDate < b.DepartureDate &&
+                        b.ArrivalDate < booking.DepartureDate);
+                        
             return overlappingBooking == null ? string.Empty : overlappingBooking.Reference;
         }
     }
